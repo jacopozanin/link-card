@@ -8,29 +8,26 @@
     <title>Jacopo Zanin - Link</title>
     <style>
         :root {
-            /* Colori testo */
             --text-main: #ffffff;
             --text-muted: rgba(235, 235, 245, 0.7);
-            --accent-color: #32d74b; /* Verde acceso per risaltare sul blu/viola */
+            --accent-color: #32d74b; 
             
             /* Glassmorphism Puro */
-            --card-bg: rgba(255, 255, 255, 0.08); /* Vetro trasparente */
-            --card-border: rgba(255, 255, 255, 0.15); /* Bordo riflettente */
-            --card-border-top: rgba(255, 255, 255, 0.3); /* Luce che batte dall'alto */
+            --card-bg: rgba(255, 255, 255, 0.08); 
+            --card-border: rgba(255, 255, 255, 0.15); 
+            --card-border-top: rgba(255, 255, 255, 0.3); 
             
             --btn-bg: rgba(255, 255, 255, 0.12);
             --btn-hover: rgba(255, 255, 255, 0.22);
             
             /* Emergenza */
-            --emergency-bg: rgba(255, 69, 58, 0.5); /* Rosso un po' più solido */
-            --emergency-text: #ffffff; /* Testo bianco puro per contrasto perfetto */
+            --emergency-bg: rgba(255, 69, 58, 0.5); /* Sfondo leggibile */
+            --emergency-text: #ffffff; /* Testo bianco */
             --emergency-border: rgba(255, 69, 58, 0.8);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            
-            /* Sfondo iOS Mesh Gradient (Blu Notte, Viola, Magenta) */
             background-color: #0f172a;
             background-image: 
                 radial-gradient(at 10% 0%, rgba(10, 132, 255, 0.6) 0px, transparent 60%),
@@ -42,18 +39,49 @@
             
             color: var(--text-main);
             margin: 0;
-            padding: 40px 15px;
+            padding: 50px 15px 40px 15px; /* Spazio extra in alto per il bottone lingua */
             display: flex;
             justify-content: center;
             min-height: 100vh;
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
+            position: relative;
         }
 
         .container {
             width: 100%;
             max-width: 440px;
         }
+
+        /* --- BOTTONE LINGUA (Top Right) --- */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+        }
+
+        .lang-switcher:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* --- LOGICA CAMBIO LINGUA CSS --- */
+        .lang-en { display: none; }
+        body.is-en .lang-it { display: none; }
+        body.is-en .lang-en { display: inline; }
 
         /* Profile Header */
         .profile {
@@ -77,7 +105,6 @@
         /* Accordion / Cards (True Liquid Glass) */
         details {
             background-color: var(--card-bg);
-            /* Il trucco del vetro: sfocatura + saturazione per accendere i colori sotto */
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
             border-radius: 20px;
@@ -101,20 +128,14 @@
             user-select: none;
         }
         
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
+        summary::-webkit-details-marker { display: none; }
         summary::after {
             content: "＋";
             color: rgba(255, 255, 255, 0.6);
             font-size: 1.2rem;
             font-weight: 300;
         }
-
-        details[open] summary::after {
-            content: "－";
-        }
+        details[open] summary::after { content: "－"; }
 
         .content {
             padding: 0 20px 20px 20px;
@@ -149,9 +170,7 @@
             transition: background-color 0.2s ease;
         }
 
-        .btn:active {
-            background-color: var(--btn-hover);
-        }
+        .btn:active { background-color: var(--btn-hover); }
 
         /* Emergency Section */
         .btn-emergency {
@@ -160,12 +179,9 @@
             border: 1px solid var(--emergency-border);
             font-weight: 500;
         }
+        .btn-emergency:active { background-color: rgba(255, 69, 58, 0.7); }
 
-        .btn-emergency:active {
-            background-color: rgba(255, 69, 58, 0.35);
-        }
-
-        /* Medical Badges & Sub-details */
+        /* Medical Badges */
         .medical-badge {
             display: inline-block;
             background-color: rgba(255, 255, 255, 0.15);
@@ -186,13 +202,11 @@
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
         }
-
         details details summary {
             font-size: 0.9rem;
             color: #38bdf8;
             padding: 14px 16px;
         }
-
         details details .content {
             padding: 0 16px 16px 16px;
             border-top: none;
@@ -202,42 +216,61 @@
 </head>
 <body>
 
+<!-- Switcher Lingua in alto a destra -->
+<button id="lang-btn" class="lang-switcher" onclick="toggleLang()">🇮🇹 IT</button>
+
 <div class="container">
     
     <!-- Profilo -->
     <div class="profile">
         <h1>Jacopo Zanin</h1>
-        <p>Benvenuto sul mio profilo digitale</p>
+        <p>
+            <span class="lang-it">Benvenuto sul mio profilo digitale</span>
+            <span class="lang-en">Welcome to my digital profile</span>
+        </p>
     </div>
 
     <!-- Tendina 1: I miei Contatti -->
     <details open>
-        <summary>📞 I miei Contatti</summary>
+        <summary>
+            <span class="lang-it">📞 I miei Contatti</span>
+            <span class="lang-en">📞 My Contacts</span>
+        </summary>
         <div class="content">
-            <p>✉️ <strong>Email Personale:</strong> jack.zanin@gmail.com</p>
-            <p>💼 <strong>Email Lavoro:</strong> j.zanin@mail.scuole.vda.it</p>
-            <p>📱 <strong>Telefono:</strong> +39 347 6664908</p>
+            <p>✉️ <strong><span class="lang-it">Email Personale</span><span class="lang-en">Personal Email</span>:</strong> jack.zanin@gmail.com</p>
+            <p>💼 <strong><span class="lang-it">Email Lavoro</span><span class="lang-en">Work Email</span>:</strong> j.zanin@mail.scuole.vda.it</p>
+            <p>📱 <strong><span class="lang-it">Telefono</span><span class="lang-en">Phone</span>:</strong> +39 347 6664908</p>
             
             <a href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3AZanin%3BJacopo%0AFN%3AJacopo%20Zanin%0ATEL%3BTYPE%3DCELL%3A%2B393476664908%0AEMAIL%3Ajack.zanin%40gmail.com%0AEND%3AVCARD" download="Jacopo_Zanin.vcf" class="btn">
-                🎴 Salva il mio contatto in rubrica
+                <span class="lang-it">🎴 Salva il mio contatto in rubrica</span>
+                <span class="lang-en">🎴 Save my contact to address book</span>
             </a>
         </div>
     </details>
 
     <!-- Tendina 2: Contatti d'Emergenza ICE -->
     <details>
-        <summary>🚨 Contatti d'Emergenza (ICE)</summary>
+        <summary>
+            <span class="lang-it">🚨 Contatti d'Emergenza (ICE)</span>
+            <span class="lang-en">🚨 Emergency Contacts (ICE)</span>
+        </summary>
         <div class="content">
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">In caso di emergenza, vi prego di contattare i miei familiari:</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">
+                <span class="lang-it">In caso di emergenza, vi prego di contattare i miei familiari:</span>
+                <span class="lang-en">In case of emergency, please contact my family members:</span>
+            </p>
             
             <a href="tel:+393401812374" class="btn btn-emergency">
-                Chiama Francesca Lattanzi <span style="font-size: 0.85rem; opacity: 0.8;">(Moglie)</span>
+                <span class="lang-it">📞 Chiama Francesca Lattanzi <span style="font-size: 0.85rem; opacity: 0.8;">(Moglie)</span></span>
+                <span class="lang-en">📞 Call Francesca Lattanzi <span style="font-size: 0.85rem; opacity: 0.8;">(Wife)</span></span>
             </a>
             <a href="tel:+393470315839" class="btn btn-emergency">
-                Chiama Mattia Zanin <span style="font-size: 0.85rem; opacity: 0.8;">(Fratello Medico)</span>
+                <span class="lang-it">🩺 Chiama Mattia Zanin <span style="font-size: 0.85rem; opacity: 0.8;">(Fratello Medico)</span></span>
+                <span class="lang-en">🩺 Call Mattia Zanin <span style="font-size: 0.85rem; opacity: 0.8;">(Brother / Doctor)</span></span>
             </a>
             <a href="tel:+393472968554" class="btn btn-emergency">
-                Chiama Giuliana Dalla Libera <span style="font-size: 0.85rem; opacity: 0.8;">(Mamma)</span>
+                <span class="lang-it">❤️ Chiama Giuliana Dalla Libera <span style="font-size: 0.85rem; opacity: 0.8;">(Mamma)</span></span>
+                <span class="lang-en">❤️ Call Giuliana Dalla Libera <span style="font-size: 0.85rem; opacity: 0.8;">(Mother)</span></span>
             </a>
         </div>
     </details>
@@ -257,74 +290,118 @@
 
     <!-- Tendina 4: Pagamenti Rapidi -->
     <details>
-        <summary>💳 Pagamenti Rapidi</summary>
+        <summary>
+            <span class="lang-it">💳 Pagamenti Rapidi</span>
+            <span class="lang-en">💳 Quick Payments</span>
+        </summary>
         <div class="content">
-            <a href="https://paypal.me/jacopozanin" target="_blank" class="btn">
-                🅿️ PayPal
-            </a>
-            <a href="https://revolut.me/jacopozanin" target="_blank" class="btn">
-                🪪 Revolut
-            </a>
-            <a href="https://web.satispay.com/download/qrcode/S6Y-CON--EC6CDFD5-2FCE-43FE-9257-8E621F8EE8EF?" target="_blank" class="btn">
-                📲 Satispay
-            </a>
+            <a href="https://paypal.me/jacopozanin" target="_blank" class="btn">🅿️ PayPal.me</a>
+            <a href="https://revolut.me/jacopozanin" target="_blank" class="btn">🪪 Revolut</a>
+            <a href="https://web.satispay.com/download/qrcode/S6Y-CON--EC6CDFD5-2FCE-43FE-9257-8E621F8EE8EF?" target="_blank" class="btn">📲 Satispay</a>
         </div>
     </details>
 
     <!-- Tendina 5: Portami a Casa -->
     <details>
-        <summary>📍 Portami a Casa</summary>
+        <summary>
+            <span class="lang-it">📍 Portami a Casa</span>
+            <span class="lang-en">📍 Take Me Home</span>
+        </summary>
         <div class="content">
-            <p>🏠 <strong>Indirizzo:</strong> Via Artanavaz 39, Aosta</p>
+            <p>🏠 <strong><span class="lang-it">Indirizzo</span><span class="lang-en">Address</span>:</strong> Via Artanavaz 39, Aosta</p>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Artanavaz+39,+Aosta" target="_blank" class="btn">
-                🗺️ Avvia Navigatore
+                <span class="lang-it">🗺️ Avvia Navigatore</span>
+                <span class="lang-en">🗺️ Start Navigation</span>
             </a>
         </div>
     </details>
 
     <!-- Tendina 6: Wi-Fi Ospiti -->
     <details>
-        <summary>📶 Wi-Fi Ospiti</summary>
+        <summary>
+            <span class="lang-it">📶 Wi-Fi Ospiti</span>
+            <span class="lang-en">📶 Guest Wi-Fi</span>
+        </summary>
         <div class="content" style="text-align: center;">
-            <p style="text-align: left;">Inquadra il QR code per connetterti in automatico alla rete:</p>
+            <p style="text-align: left;">
+                <span class="lang-it">Inquadra il QR code per connetterti in automatico alla rete:</span>
+                <span class="lang-en">Scan the QR code to auto-connect to the network:</span>
+            </p>
             
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=WIFI:T:WPA;S:Vodafone%20Benjamin%20FrankLAN;P:Zibuni12;;" 
                  alt="Wi-Fi QR Code" 
                  style="background: white; padding: 12px; border-radius: 16px; margin: 15px 0;">
             
-            <p style="text-align: left; margin-bottom: 5px;"><strong>Rete:</strong> Vodafone Benjamin FrankLAN</p>
+            <p style="text-align: left; margin-bottom: 5px;"><strong><span class="lang-it">Rete</span><span class="lang-en">Network</span>:</strong> Vodafone Benjamin FrankLAN</p>
             <p style="text-align: left;"><strong>Password:</strong> Zibuni12</p>
         </div>
     </details>
 
     <!-- Tendina 7: Scheda Medica & Allergie -->
     <details>
-        <summary>🩺 Scheda Medica & Allergie</summary>
+        <summary>
+            <span class="lang-it">🩺 Scheda Medica & Allergie</span>
+            <span class="lang-en">🩺 Medical Profile & Allergies</span>
+        </summary>
         <div class="content">
             <p style="margin-top: 12px; margin-bottom: 14px;">
-                🩸 <strong>Gruppo Sanguigno:</strong> <span class="medical-badge">0 Negativo (0-)</span>
+                🩸 <strong><span class="lang-it">Gruppo Sanguigno</span><span class="lang-en">Blood Type</span>:</strong> 
+                <span class="medical-badge">
+                    <span class="lang-it">0 Negativo (0-)</span>
+                    <span class="lang-en">0 Negative (0-)</span>
+                </span>
             </p>
             <p>
-                🩸 <strong>Patologia Principale:</strong> Diabete Mellito di Tipo 1
+                🩸 <strong><span class="lang-it">Patologia Principale</span><span class="lang-en">Main Condition</span>:</strong> 
+                <span class="lang-it">Diabete Mellito di Tipo 1</span>
+                <span class="lang-en">Type 1 Diabetes</span>
             </p>
             
             <!-- Dettaglio Terapia Diabete -->
             <details>
-                <summary>ℹ️ Dettagli terapia e dispositivi in uso</summary>
+                <summary>
+                    <span class="lang-it">ℹ️ Dettagli terapia e dispositivi in uso</span>
+                    <span class="lang-en">ℹ️ Therapy and devices details</span>
+                </summary>
                 <div class="content">
-                    <p>💊 <strong>Farmaco:</strong> Insulina NovoRapid</p>
-                    <p>📟 <strong>Somministrazione:</strong> Infusione continua tramite microinfusore <em>Medtronic MiniMed 780G</em></p>
-                    <p>📊 <strong>Monitoraggio:</strong> Controllo continuo della glicemia tramite sensore <em>Instinct</em></p>
+                    <p>💊 <strong><span class="lang-it">Farmaco</span><span class="lang-en">Medication</span>:</strong> <span class="lang-it">Insulina NovoRapid</span><span class="lang-en">NovoRapid Insulin</span></p>
+                    <p>📟 <strong><span class="lang-it">Somministrazione</span><span class="lang-en">Administration</span>:</strong> <span class="lang-it">Infusione continua tramite microinfusore</span><span class="lang-en">Continuous infusion via insulin pump</span> <em>Medtronic MiniMed 780G</em></p>
+                    <p>📊 <strong><span class="lang-it">Monitoraggio</span><span class="lang-en">Monitoring</span>:</strong> <span class="lang-it">Controllo continuo della glicemia tramite sensore</span><span class="lang-en">Continuous glucose monitoring via sensor</span> <em>Instinct</em></p>
                 </div>
             </details>
 
             <p style="margin-top: 14px;">
-                🌾 <strong>Altre Condizioni:</strong> Celiachia <em>(Intolleranza al glutine)</em>
+                🌾 <strong><span class="lang-it">Altre Condizioni</span><span class="lang-en">Other Conditions</span>:</strong> 
+                <span class="lang-it">Celiachia <em>(Intolleranza al glutine)</em></span>
+                <span class="lang-en">Celiac Disease <em>(Gluten Intolerance)</em></span>
             </p>
         </div>
     </details>
 
+    <!-- Footer / Ultimo Aggiornamento -->
+    <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+        <p style="color: rgba(255,255,255,0.4); font-size: 0.75rem; letter-spacing: 0.05em;">
+            <span class="lang-it">Ultimo aggiornamento: Settembre 2026</span>
+            <span class="lang-en">Last updated: September 2026</span>
+        </p>
+    </div>
+
 </div>
+
+<!-- SCRIPT PER IL CAMBIO LINGUA -->
+<script>
+    function toggleLang() {
+        document.body.classList.toggle('is-en');
+        const btn = document.getElementById('lang-btn');
+        if (document.body.classList.contains('is-en')) {
+            btn.innerHTML = '🇬🇧 ENG'; // Mostra il tasto per tornare all'inglese (oppure '🇮🇹 IT' se vuoi indicare a cosa si torna)
+            // Se preferisci che il tasto indichi la lingua a cui puoi passare, usiamo IT:
+            btn.innerHTML = '🇮🇹 IT';
+        } else {
+            btn.innerHTML = '🇬🇧 ENG';
+        }
+    }
+</script>
 
 </body>
 </html>
