@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacopo Zanin - Link</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --alert-bg: #450a0a;
+            --alert-border: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        /* Profile Header */
+        .profile {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .profile img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            object-fit: cover;
+        }
+        .profile h1 {
+            margin: 10px 0 5px;
+            font-size: 1.5rem;
+        }
+        .profile p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Accordion / Menu a tendina */
+        details {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        
+        summary {
+            padding: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "＋";
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        details[open] summary::after {
+            content: "－";
+        }
+
+        .content {
+            padding: 0 16px 16px 16px;
+            border-top: 1px solid #334155;
+            margin-top: 5px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Buttons & Links */
+        .btn {
+            display: block;
+            background-color: #334155;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+
+        .btn-emergency {
+            background-color: #dc2626;
+            color: white;
+            font-weight: bold;
+        }
+
+        .medical-box {
+            background-color: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Profilo -->
+    <div class="profile">
+        <h1>Jacopo Zanin</h1>
+        <p>Benvenuto sul mio profilo digitale</p>
+    </div>
+
+   <!-- Tendina 1: Contatti Rapidi & Emergenza -->
+    <details open>
+        <summary>📞 Contatti & Emergenza</summary>
+        <div class="content">
+            <p><strong>Email Personale:</strong> jack.zanin@gmail.com</p>
+            <p><strong>Email Lavoro:</strong> j.zanin@mail.scuole.vda.it</p>
+            <p><strong>Telefono:</strong> +39 347 6664908</p>
+            
+            <a href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3AZanin%3BJacopo%0AFN%3AJacopo%20Zanin%0ATEL%3BTYPE%3DCELL%3A%2B393476664908%0AEMAIL%3Ajack.zanin%40gmail.com%0AEND%3AVCARD" download="Jacopo_Zanin.vcf" class="btn">🎴 Salva il mio contatto in rubrica</a>
+
+            <!-- Contatti d'Emergenza -->
+            <a href="tel:+393401812374" class="btn btn-emergency">🚨 Emergenza: Chiama Francesca Lattanzi (Moglie)</a>
+            <a href="tel:+393470315839" class="btn btn-emergency">🚨 Emergenza: Chiama Fratello (Medico)</a>
+            <a href="tel:+393472968554" class="btn btn-emergency">🚨 Emergenza: Chiama Mamma</a>
+        </div>
+    </details>
+  
+    <!-- Tendina 2: Social Media -->
+    <details>
+        <summary>🌐 Social Media</summary>
+        <div class="content">
+            <a href="https://instagram.com/jackzanin" target="_blank" class="btn">Instagram</a>
+            <a href="https://linkedin.com/in/tuousername" target="_blank" class="btn">LinkedIn</a>
+        </div>
+    </details>
+
+    <!-- Tendina 3: Pagamenti Rapidi -->
+    <details>
+        <summary>💳 Pagamenti Rapidi</summary>
+        <div class="content">
+            <a href="https://paypal.me/jacopozanin" target="_blank" class="btn">PayPal.me</a>
+            <a href="https://revolut.me/jacopozanin" target="_blank" class="btn">Revolut</a>
+            <a href="https://web.satispay.com/download/qrcode/S6Y-CON--EC6CDFD5-2FCE-43FE-9257-8E621F8EE8EF?" target="_blank" class="btn">Satispay</a>
+        </div>
+    </details>
+
+    <!-- Tendina 4: Scheda Medica & Allergie -->
+    <details>
+        <summary>🩺 Scheda Medica & Allergie</summary>
+        <div class="content">
+            <div class="medical-box">
+                <p style="font-size: 1.1rem; color: #ef4444; margin-bottom: 12px;">
+                    <strong>Gruppo Sanguigno:</strong> 0 Negativo (0-)
+                </p>
+                <p>
+                    <strong>Patologia Principale:</strong> Diabete Mellito di Tipo 1
+                </p>
+                
+                <!-- Link/Dettaglio Terapia Diabete -->
+                <details style="background: rgba(0,0,0,0.2); margin: 10px 0; border: 1px solid #ef4444;">
+                    <summary style="font-size: 0.85rem; color: var(--accent-color);">ℹ️ Dettagli terapia e dispositivi in uso</summary>
+                    <div class="content" style="font-size: 0.85rem; padding-top: 10px;">
+                        <p><strong>Farmaco:</strong> Insulina NovoRapid</p>
+                        <p><strong>Somministrazione:</strong> Infusione continua tramite microinfusore <em>Medtronic MiniMed 780G</em></p>
+                        <p><strong>Monitoraggio:</strong> Controllo continuo della glicemia tramite sensore <em>Instinct</em></p>
+                    </div>
+                </details>
+
+                <p style="margin-top: 12px;">
+                    <strong>Altre Condizioni:</strong> Celiachia (Intolleranza al glutine)
+                </p>
+            </div>
+        </div>
+    </details>
+
+</div>
+
+</body>
+</html>
