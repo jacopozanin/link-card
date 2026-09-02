@@ -6,30 +6,32 @@
     <title>Jacopo Zanin - Link</title>
     <style>
         :root {
-            /* Sfondo OLED Black */
-            --bg-color: #000000;
-            
-            /* Effetto Liquid Glass iOS */
-            --card-bg: rgba(255, 255, 255, 0.12);
-            --card-border: rgba(255, 255, 255, 0.22);
-            
-            --text-main: #f5f5f7;
+            /* Colori testo e bottoni */
+            --text-main: #ffffff;
             --text-muted: rgba(235, 235, 245, 0.6);
             --accent-color: #0a84ff;
             
-            /* Bottoni interni */
-            --btn-bg: rgba(255, 255, 255, 0.1);
-            --btn-hover: rgba(255, 255, 255, 0.18);
+            /* Glassmorphism avanzato */
+            --card-bg: rgba(255, 255, 255, 0.08); /* Vetro molto trasparente */
+            --card-border: rgba(255, 255, 255, 0.18); /* Bordo riflettente per la luce */
+            --btn-bg: rgba(255, 255, 255, 0.12);
+            --btn-hover: rgba(255, 255, 255, 0.2);
             
             /* Emergenza */
             --emergency-bg: rgba(255, 69, 58, 0.15);
             --emergency-text: #ff453a;
-            --emergency-border: rgba(255, 69, 58, 0.25);
+            --emergency-border: rgba(255, 69, 58, 0.3);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
+            /* Sfondo a gradiente dinamico molto scuro per far risaltare il vetro */
+            background-color: #000000;
+            background-image: 
+                radial-gradient(circle at 15% 0%, #1f1f2e 0%, transparent 40%),
+                radial-gradient(circle at 85% 100%, #1a1a24 0%, transparent 40%);
+            background-attachment: fixed;
+            
             color: var(--text-main);
             margin: 0;
             padding: 40px 15px;
@@ -63,18 +65,18 @@
             font-weight: 400;
         }
 
-        /* Accordion / Cards (Liquid Glass) */
+        /* Accordion / Cards (True Liquid Glass) */
         details {
             background-color: var(--card-bg);
-            /* Sfocatura del vetro smerigliato */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 18px;
+            /* Saturazione e sfocatura per l'effetto vetro di iOS */
+            backdrop-filter: saturate(180%) blur(25px);
+            -webkit-backdrop-filter: saturate(180%) blur(25px);
+            border-radius: 20px;
             margin-bottom: 16px;
             overflow: hidden;
             border: 1px solid var(--card-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         summary {
@@ -95,7 +97,7 @@
 
         summary::after {
             content: "＋";
-            color: rgba(235, 235, 245, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 1.2rem;
             font-weight: 300;
         }
@@ -109,7 +111,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 0.95rem;
             line-height: 1.5;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .content p {
@@ -126,8 +128,6 @@
             justify-content: center;
             gap: 10px;
             background-color: var(--btn-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             color: var(--text-main);
             text-decoration: none;
             padding: 16px;
@@ -135,7 +135,7 @@
             margin-top: 12px;
             font-weight: 500;
             font-size: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: background-color 0.2s ease;
         }
 
@@ -158,7 +158,7 @@
         /* Medical Badges & Sub-details */
         .medical-badge {
             display: inline-block;
-            background-color: rgba(10, 132, 255, 0.15);
+            background-color: rgba(10, 132, 255, 0.2);
             color: var(--accent-color);
             padding: 4px 12px;
             border-radius: 20px;
@@ -277,7 +277,6 @@
         <div class="content" style="text-align: center;">
             <p style="text-align: left;">Inquadra il QR code per connetterti in automatico alla rete:</p>
             
-            <!-- Immagine QR generata in automatico -->
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=WIFI:T:WPA;S:Vodafone%20Benjamin%20FrankLAN;P:Zibuni12;;" 
                  alt="Wi-Fi QR Code" 
                  style="background: white; padding: 12px; border-radius: 16px; margin: 15px 0;">
