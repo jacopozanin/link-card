@@ -6,31 +6,37 @@
     <title>Jacopo Zanin - Link</title>
     <style>
         :root {
-            /* Colori testo e bottoni */
+            /* Colori testo */
             --text-main: #ffffff;
-            --text-muted: rgba(235, 235, 245, 0.6);
-            --accent-color: #0a84ff;
+            --text-muted: rgba(235, 235, 245, 0.7);
+            --accent-color: #32d74b; /* Verde acceso per risaltare sul blu/viola */
             
-            /* Glassmorphism avanzato */
-            --card-bg: rgba(255, 255, 255, 0.08); /* Vetro molto trasparente */
-            --card-border: rgba(255, 255, 255, 0.18); /* Bordo riflettente per la luce */
+            /* Glassmorphism Puro */
+            --card-bg: rgba(255, 255, 255, 0.08); /* Vetro trasparente */
+            --card-border: rgba(255, 255, 255, 0.15); /* Bordo riflettente */
+            --card-border-top: rgba(255, 255, 255, 0.3); /* Luce che batte dall'alto */
+            
             --btn-bg: rgba(255, 255, 255, 0.12);
-            --btn-hover: rgba(255, 255, 255, 0.2);
+            --btn-hover: rgba(255, 255, 255, 0.22);
             
             /* Emergenza */
-            --emergency-bg: rgba(255, 69, 58, 0.15);
-            --emergency-text: #ff453a;
-            --emergency-border: rgba(255, 69, 58, 0.3);
+            --emergency-bg: rgba(255, 69, 58, 0.2);
+            --emergency-text: #ff6961;
+            --emergency-border: rgba(255, 69, 58, 0.4);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* Sfondo a gradiente dinamico molto scuro per far risaltare il vetro */
-            background-color: #000000;
+            
+            /* Sfondo iOS Mesh Gradient (Blu Notte, Viola, Magenta) */
+            background-color: #0f172a;
             background-image: 
-                radial-gradient(circle at 15% 0%, #1f1f2e 0%, transparent 40%),
-                radial-gradient(circle at 85% 100%, #1a1a24 0%, transparent 40%);
+                radial-gradient(at 10% 0%, rgba(10, 132, 255, 0.6) 0px, transparent 60%),
+                radial-gradient(at 90% 10%, rgba(191, 90, 242, 0.6) 0px, transparent 60%),
+                radial-gradient(at 90% 90%, rgba(255, 55, 95, 0.4) 0px, transparent 60%),
+                radial-gradient(at 10% 90%, rgba(48, 209, 88, 0.2) 0px, transparent 60%);
             background-attachment: fixed;
+            background-size: cover;
             
             color: var(--text-main);
             margin: 0;
@@ -57,6 +63,7 @@
             font-size: 1.85rem;
             font-weight: 700;
             letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .profile p {
             color: var(--text-muted);
@@ -68,14 +75,15 @@
         /* Accordion / Cards (True Liquid Glass) */
         details {
             background-color: var(--card-bg);
-            /* Saturazione e sfocatura per l'effetto vetro di iOS */
-            backdrop-filter: saturate(180%) blur(25px);
-            -webkit-backdrop-filter: saturate(180%) blur(25px);
+            /* Il trucco del vetro: sfocatura + saturazione per accendere i colori sotto */
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
             border-radius: 20px;
             margin-bottom: 16px;
             overflow: hidden;
             border: 1px solid var(--card-border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border-top: 1px solid var(--card-border-top);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
@@ -97,7 +105,7 @@
 
         summary::after {
             content: "＋";
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 1.2rem;
             font-weight: 300;
         }
@@ -108,10 +116,10 @@
 
         .content {
             padding: 0 20px 20px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.95rem;
             line-height: 1.5;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .content p {
@@ -135,7 +143,7 @@
             margin-top: 12px;
             font-weight: 500;
             font-size: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: background-color 0.2s ease;
         }
 
@@ -152,22 +160,23 @@
         }
 
         .btn-emergency:active {
-            background-color: rgba(255, 69, 58, 0.25);
+            background-color: rgba(255, 69, 58, 0.35);
         }
 
         /* Medical Badges & Sub-details */
         .medical-badge {
             display: inline-block;
-            background-color: rgba(10, 132, 255, 0.2);
-            color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ff453a;
             padding: 4px 12px;
             border-radius: 20px;
             font-weight: 600;
             font-size: 0.95rem;
+            border: 1px solid rgba(255, 69, 58, 0.3);
         }
 
         details details {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.1);
             margin: 16px 0;
             border-radius: 14px;
@@ -178,7 +187,7 @@
 
         details details summary {
             font-size: 0.9rem;
-            color: var(--accent-color);
+            color: #38bdf8;
             padding: 14px 16px;
         }
 
