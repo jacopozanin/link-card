@@ -217,7 +217,7 @@
 <body>
 
 <!-- Switcher Lingua in alto a destra -->
-<button id="lang-btn" class="lang-switcher" onclick="toggleLang()">🇮🇹 IT</button>
+<button id="lang-btn" class="lang-switcher" onclick="toggleLang()">🇬🇧 ENG</button>
 
 <div class="container">
     
@@ -393,11 +393,12 @@
     function toggleLang() {
         document.body.classList.toggle('is-en');
         const btn = document.getElementById('lang-btn');
+        
+        // Se la pagina è in inglese, il tasto deve mostrare "IT" per tornare indietro
         if (document.body.classList.contains('is-en')) {
-            btn.innerHTML = '🇬🇧 ENG'; // Mostra il tasto per tornare all'inglese (oppure '🇮🇹 IT' se vuoi indicare a cosa si torna)
-            // Se preferisci che il tasto indichi la lingua a cui puoi passare, usiamo IT:
             btn.innerHTML = '🇮🇹 IT';
         } else {
+            // Altrimenti, se è in italiano, il tasto deve mostrare "ENG"
             btn.innerHTML = '🇬🇧 ENG';
         }
     }
